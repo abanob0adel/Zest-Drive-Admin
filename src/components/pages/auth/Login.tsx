@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useLogin } from "./logic";
+import { useLogin } from "./Logic";
 
 export default function Login() {
   const { onSubmit, register, handleSubmit, isSubmitting, errors } = useLogin();
