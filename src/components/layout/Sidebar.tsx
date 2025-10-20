@@ -5,7 +5,10 @@ import { ScrollArea } from "@radix-ui/react-scroll-area";
 export default function Sidebar() {
   return (
     <>
-      <ScrollArea className="bg-sidebar min-h-screen p-8" dir="rtl">
+      <ScrollArea
+        className="bg-sidebar !fixed top-0 right-0 min-h-screen p-8"
+        dir="rtl"
+      >
         <a href={routes.Dashboard?.Home} className="text-4xl ">
           Zest Admin
         </a>

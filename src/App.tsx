@@ -5,7 +5,8 @@ import ProtectedRoute from "./components/layout/ProtectedRoute";
 import Overview from "./components/pages/dashboard/Overview";
 import DashboardLayout from "./components/layout/DashboardLayout";
 import routes from "./lib/routes";
-import MainBrands from "./components/pages/dashboard/Brands/MainBrands";
+import MainBrands from "./components/pages/dashboard/Brands/main/MainBrands";
+import AddBrand from "./components/pages/dashboard/Brands/add/AddBrand";
 
 function App() {
   return (
@@ -23,6 +24,10 @@ function App() {
             <Route
               path={routes?.Dashboard?.Brand?.Main}
               element={<MainBrands />}
+            />
+            <Route
+              path={routes?.Dashboard?.Brand?.Add}
+              element={<AddBrand />}
             />
           </Route>
 
