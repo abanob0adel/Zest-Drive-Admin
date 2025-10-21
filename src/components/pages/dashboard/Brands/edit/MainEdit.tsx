@@ -1,11 +1,11 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useAddBrand } from "./Logic";
+import { useEditBrand } from "./Logic";
 import { Textarea } from "@/components/ui/textarea";
 
-export default function AddBrand() {
-  const { register, handleSubmit, onSubmit, isSubmitting } = useAddBrand();
+export default function MainEdit() {
+  const { register, handleSubmit, onSubmit, isSubmitting } = useEditBrand();
 
   return (
     <div className="h-screen flex flex-col items-center justify-center">
@@ -37,7 +37,7 @@ export default function AddBrand() {
           />
           <Input type="file" accept="image/*" {...register("logo")} />
           <Button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? "جاري الإضافة..." : "أضف البراند الآن"}
+            {isSubmitting ? "جاري الإضافة..." : "تعديل البراند الآن"}
           </Button>
         </form>
       </div>

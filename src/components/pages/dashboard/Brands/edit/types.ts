@@ -1,4 +1,4 @@
-export interface AddBrandTypes {
+export interface EditBrandTypes {
   name_ar: string;
   name_en: string;
   country: string;

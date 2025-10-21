@@ -1,6 +1,6 @@
 import PageHeader from "@/components/layout/PageHeader";
 import routes from "@/lib/routes";
-import { Add } from "iconsax-reactjs";
+import { Add, Edit, Trash } from "iconsax-reactjs";
 import {
   Table,
   TableBody,
@@ -11,6 +11,8 @@ import {
 } from "@/components/ui/table";
 import { useGetBrands } from "./Logic";
 import type { SingleBrandResponse } from "@/types/Brand";
+import Loading from "@/components/shared/Loading";
+import { Button } from "@/components/ui/button";
 export default function MainBrands() {
   const { brands, isFetching } = useGetBrands();
   return (
@@ -22,7 +24,7 @@ export default function MainBrands() {
         icon={<Add />}
       />
       {isFetching ? (
-        "asd"
+        <Loading />
       ) : (
         <Table className="mt-8">
           <TableHeader>
@@ -48,7 +50,18 @@ export default function MainBrands() {
                 <TableCell>{item?.name_ar}</TableCell>
                 <TableCell>{item?.name_en}</TableCell>
                 <TableCell>{item?.country}</TableCell>
-                <TableCell>تيست</TableCell>
+                <TableCell>
+                  <div className="flex items-center gap-4">
+                    <Button variant="secondary" size="icon" asChild>
+                      <a href={routes?.Dashboard?.Brand?.Edit(item.slug)}>
+                        <Edit />
+                      </a>
+                    </Button>
+                    <Button variant="destructive" size="icon">
+                      <Trash />
+                    </Button>
+                  </div>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

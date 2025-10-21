@@ -16,6 +16,8 @@ export const useAddBrand = () => {
       const formData = new FormData();
       formData.append("name_ar", data.name_ar);
       formData.append("name_en", data.name_en);
+      formData.append("meta_title", data.meta_title);
+      formData.append("meta_description", data.meta_description);
       formData.append("country", data.country);
 
       if (data.logo && data.logo[0]) {

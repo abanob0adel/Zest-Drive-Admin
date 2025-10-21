@@ -7,6 +7,7 @@ import DashboardLayout from "./components/layout/DashboardLayout";
 import routes from "./lib/routes";
 import MainBrands from "./components/pages/dashboard/Brands/main/MainBrands";
 import AddBrand from "./components/pages/dashboard/Brands/add/AddBrand";
+import MainEdit from "./components/pages/dashboard/Brands/edit/MainEdit";
 
 function App() {
   return (
@@ -28,6 +29,10 @@ function App() {
             <Route
               path={routes?.Dashboard?.Brand?.Add}
               element={<AddBrand />}
+            />
+            <Route
+              path={`${routes?.Dashboard?.Brand.Edit(":slug")}`}
+              element={<MainEdit />}
             />
           </Route>
 
