@@ -41,12 +41,16 @@ export default function MainBrands() {
             {brands?.map((item: SingleBrandResponse) => (
               <TableRow key={item?._id}>
                 <TableCell>
-                  <img
-                    src={item?.logo}
-                    alt={item?.name_en}
-                    width={100}
-                    height={100}
-                  />
+                  {item?.logo ? (
+                    <img
+                      src={item?.logo}
+                      alt={item?.name_en}
+                      width={100}
+                      height={100}
+                    />
+                  ) : (
+                    <div className="bg-sidebar w-[50px] h-[50px]" />
+                  )}
                 </TableCell>
                 <TableCell>{item?.name_ar}</TableCell>
                 <TableCell>{item?.name_en}</TableCell>
