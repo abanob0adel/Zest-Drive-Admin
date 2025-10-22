@@ -1,6 +1,6 @@
 import PageHeader from "@/components/layout/PageHeader";
 import routes from "@/lib/routes";
-import { Add, Edit, Trash } from "iconsax-reactjs";
+import { Add, Edit } from "iconsax-reactjs";
 import {
   Table,
   TableBody,
@@ -13,6 +13,7 @@ import { useGetBrands } from "./Logic";
 import type { SingleBrandResponse } from "@/types/Brand";
 import Loading from "@/components/shared/Loading";
 import { Button } from "@/components/ui/button";
+import MainDelete from "../delete/MainDelete";
 export default function MainBrands() {
   const { brands, isFetching } = useGetBrands();
   return (
@@ -57,9 +58,7 @@ export default function MainBrands() {
                         <Edit />
                       </a>
                     </Button>
-                    <Button variant="destructive" size="icon">
-                      <Trash />
-                    </Button>
+                    <MainDelete title={item?.name_en} slug={item?.slug} />
                   </div>
                 </TableCell>
               </TableRow>
