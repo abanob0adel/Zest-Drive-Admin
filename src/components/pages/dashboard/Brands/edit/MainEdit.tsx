@@ -29,7 +29,7 @@ export default function MainEdit() {
           <Input
             placeholder="meta_title"
             type="text"
-            {...register("meta_title", { required: true })}
+            {...register("meta_title")}
           />
           <Textarea
             placeholder="meta_desctiption"
