@@ -47,6 +47,7 @@ export default function MainBrands() {
                       alt={item?.name_en}
                       width={100}
                       height={100}
+                      className="object-cover object-center bg-sidebar"
                     />
                   ) : (
                     <div className="bg-sidebar w-[50px] h-[50px]" />
