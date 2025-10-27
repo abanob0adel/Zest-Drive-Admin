@@ -1,62 +1,89 @@
+"use client";
+import { useState } from "react";
 import PageHeader from "@/components/layout/PageHeader";
 import routes from "@/lib/routes";
-import { Add } from "iconsax-reactjs";
+import { Add, Edit, Eye, Image } from "iconsax-reactjs";
+import { useGetCars } from "./Logic";
+import Loading from "@/components/shared/Loading";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
+import type { Car } from "./types";
+import CarDetailsDialog from "@/components/shared/CarDetailsDialog";
+import MainDelete from "../delete/MainDelete";
+
 export default function MainCars() {
+  const { cars, isFetching } = useGetCars();
+  const [selectedCar, setSelectedCar] = useState<Car | null>(null);
+
   return (
     <>
       <PageHeader
         PageTitle="السيارات"
-        ButtonTitle="أضافة سيارة جديدة"
+        ButtonTitle="إضافة سيارة جديدة"
         url={routes?.Dashboard?.Car?.Add}
         icon={<Add />}
       />
-      {/* {isFetching ? (
+
+      {isFetching ? (
         <Loading />
       ) : (
         <Table className="mt-8">
           <TableHeader>
             <TableRow>
-              <TableHead>الصورة</TableHead>
-              <TableHead>الاسم باللغة العربية</TableHead>
-              <TableHead>الاسم باللغة الانجليزية</TableHead>
-              <TableHead>الصناعة</TableHead>
-              <TableHead>اجراءات</TableHead>
+              <TableHead>الاسم بالعربية</TableHead>
+              <TableHead>الاسم بالإنجليزية</TableHead>
+              <TableHead>العلامة التجارية</TableHead>
+              <TableHead>إجراءات</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {brands?.map((item: SingleBrandResponse) => (
-              <TableRow key={item?._id}>
+            {cars?.cars.map((item: Car) => (
+              <TableRow key={item._id}>
+                <TableCell>{item.model_name_ar}</TableCell>
+                <TableCell>{item.model_name_en}</TableCell>
                 <TableCell>
-                  {item?.logo ? (
-                    <img
-                      src={item?.logo}
-                      alt={item?.name_en}
-                      width={100}
-                      height={100}
-                      className="object-cover object-center bg-sidebar"
-                    />
-                  ) : (
-                    <div className="bg-sidebar w-[50px] h-[50px]" />
-                  )}
+                  {typeof item.brand === "string"
+                    ? item.brand
+                    : item.brand?.name_en}
                 </TableCell>
-                <TableCell>{item?.name_ar}</TableCell>
-                <TableCell>{item?.name_en}</TableCell>
-                <TableCell>{item?.country}</TableCell>
                 <TableCell>
-                  <div className="flex items-center gap-4">
-                    <Button variant="secondary" size="icon" asChild>
-                      <a href={routes?.Dashboard?.Brand?.Edit(item.slug)}>
-                        <Edit />
-                      </a>
+                  <div className="flex items-center gap-3">
+                    <Button
+                      variant="secondary"
+                      size="icon"
+                      onClick={() => setSelectedCar(item)}
+                    >
+                      <Eye />
                     </Button>
-                    <MainDelete title={item?.name_en} slug={item?.slug} />
+                    <Button variant="secondary" size="icon">
+                      <Edit />
+                    </Button>
+                    <Button variant="secondary" size="icon">
+                      <Image />
+                    </Button>
+                    <MainDelete slug={item?.slug} title={item.model_name_ar} />
                   </div>
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
-      )} */}
+      )}
+
+      {selectedCar && (
+        <CarDetailsDialog
+          car={selectedCar}
+          open={!!selectedCar}
+          onClose={() => setSelectedCar(null)}
+        />
+      )}
     </>
   );
 }

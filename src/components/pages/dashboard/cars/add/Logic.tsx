@@ -14,6 +14,26 @@ export const useAddCar = () => {
     formState: { isSubmitting },
   } = useForm<AddCarTypes>();
 
+  const appendFormData = (formData: FormData, data: any, parentKey = "") => {
+    Object.entries(data).forEach(([key, value]) => {
+      if (value === undefined || value === null) return;
+
+      const fullKey = parentKey ? `${parentKey}.${key}` : key;
+
+      if (value instanceof FileList) return;
+
+      if (typeof value === "boolean") {
+        formData.append(fullKey, value ? "true" : "false");
+      } else if (typeof value === "object" && !Array.isArray(value)) {
+        appendFormData(formData, value, fullKey);
+      } else if (Array.isArray(value)) {
+        formData.append(fullKey, JSON.stringify(value));
+      } else {
+        formData.append(fullKey, String(value));
+      }
+    });
+  };
+
   const onSubmit: SubmitHandler<AddCarTypes> = async (data) => {
     try {
       const formData = new FormData();
@@ -24,54 +44,12 @@ export const useAddCar = () => {
         "exterior_images",
         "interior_images",
       ];
+      const cleanData = Object.fromEntries(
+        Object.entries(data).filter(([key]) => !excludeKeys.includes(key))
+      );
 
-      Object.entries(data).forEach(([key, value]) => {
-        if (excludeKeys.includes(key)) return;
-        if (value === undefined || value === null) return;
+      appendFormData(formData, cleanData);
 
-        // ✅ لو boolean نحولها string
-        if (typeof value === "boolean") {
-          formData.append(key, value ? "true" : "false");
-          return;
-        }
-
-        // ✅ لو object من النوع "specifications"
-        if (key === "specifications" && typeof value === "object") {
-          const specs = value as Record<string, any>;
-          Object.entries(specs).forEach(([subKey, subVal]) => {
-            if (typeof subVal === "object" && subVal !== null) {
-              Object.entries(subVal).forEach(([innerKey, innerVal]) => {
-                formData.append(
-                  `specifications.${subKey}.${innerKey}`,
-                  String(innerVal)
-                );
-              });
-            } else {
-              formData.append(`specifications.${subKey}`, String(subVal));
-            }
-          });
-          return;
-        }
-
-        // ✅ لو object تاني (زي warranty أو features)
-        if (typeof value === "object" && !Array.isArray(value)) {
-          Object.entries(value).forEach(([subKey, subVal]) => {
-            if (subVal !== undefined && subVal !== null)
-              formData.append(`${key}.${subKey}`, String(subVal));
-          });
-          return;
-        }
-
-        // ✅ لو array (زي meta_keywords, variants)
-        if (Array.isArray(value)) {
-          formData.append(key, JSON.stringify(value));
-          return;
-        }
-
-        formData.append(key, String(value));
-      });
-
-      // ✅ الصور
       if (data.thumbnail?.[0]) formData.append("thumbnail", data.thumbnail[0]);
       if (data.featured_image?.[0])
         formData.append("featured_image", data.featured_image[0]);
@@ -89,6 +67,7 @@ export const useAddCar = () => {
       }
 
       const response = await addCarRequest(formData);
+
       if (response?.car) {
         toast.success("🚗 تم إضافة السيارة بنجاح!");
         reset();

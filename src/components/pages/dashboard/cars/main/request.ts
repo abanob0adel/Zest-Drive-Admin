@@ -1,7 +1,7 @@
 import { axios } from "@/lib/axios";
-import type { SingleBrandResponse } from "@/types/Brand";
+import type { CarListResponse } from "./types";
 
-export const getAllcars = async (): Promise<SingleBrandResponse[]> => {
+export const getAllcars = async (): Promise<CarListResponse> => {
   const response = await axios.get(`cars`);
   return response.data;
 };
