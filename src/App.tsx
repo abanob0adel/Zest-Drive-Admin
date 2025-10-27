@@ -8,6 +8,8 @@ import routes from "./lib/routes";
 import MainBrands from "./components/pages/dashboard/Brands/main/MainBrands";
 import AddBrand from "./components/pages/dashboard/Brands/add/AddBrand";
 import MainEdit from "./components/pages/dashboard/Brands/edit/MainEdit";
+import MainCars from "./components/pages/dashboard/cars/main/MainCars";
+import AddCar from "./components/pages/dashboard/cars/add/AddCar";
 
 function App() {
   return (
@@ -34,6 +36,8 @@ function App() {
               path={`${routes?.Dashboard?.Brand.Edit(":slug")}`}
               element={<MainEdit />}
             />
+            <Route path={routes?.Dashboard?.Car?.Main} element={<MainCars />} />
+            <Route path={routes?.Dashboard?.Car?.Add} element={<AddCar />} />
           </Route>
 
           {/* Public Routes */}

@@ -9,6 +9,11 @@ const routes = {
       Add: "/brands/add",
       Edit: (slug: string) => `/brands/edit/${slug}`,
     },
+    Car: {
+      Main: "/car",
+      Add: "/car/add",
+      Edit: (slug: string) => `/car/edit/${slug}`,
+    },
   },
 } as const;
 

@@ -1,5 +1,5 @@
 import routes from "@/lib/routes";
-import { Car } from "iconsax-reactjs";
+import { Car, SmartCar } from "iconsax-reactjs";
 
 export default function Overview() {
   return (
@@ -12,9 +12,13 @@ export default function Overview() {
           <Car />
           قائمة البراندات
         </a>
-        <div className="bg-sidebar p-8 h-40 flex items-center justify-center rounded-2xl">
-          قريبا!
-        </div>
+        <a
+          href={routes?.Dashboard?.Car.Main}
+          className="bg-sidebar p-8 h-40 flex items-center gap-4 justify-center rounded-2xl"
+        >
+          <SmartCar />
+          قائمة السيارات
+        </a>
         <div className="bg-sidebar p-8 h-40 flex items-center justify-center rounded-2xl">
           قريبا!
         </div>
