@@ -12,15 +12,15 @@ export type CarCategory =
 export type Availability = "available" | "upcoming" | "discontinued";
 
 export interface PriceRange {
-  min?: number;
-  max?: number;
+  min?: string;
+  max?: string;
 }
 
 export interface CarVariant {
   name_ar: string;
   name_en: string;
   year: number;
-  price?: number;
+  price?: string;
   price_range?: PriceRange;
   availability?: Availability;
   release_date?: string;
@@ -29,41 +29,41 @@ export interface CarVariant {
 
 export interface EngineSpecs {
   type?: string;
-  displacement?: number;
-  cylinders?: number;
-  horsepower?: number;
-  torque?: number;
+  displacement?: string;
+  cylinders?: string;
+  horsepower?: string;
+  torque?: string;
   fuel_system?: string;
 }
 
 export interface TransmissionSpecs {
   type?: string;
-  gears?: number;
+  gears?: string;
 }
 
 export interface PerformanceSpecs {
-  top_speed?: number;
-  acceleration_0_100?: number;
+  top_speed?: string;
+  acceleration_0_100?: string;
   fuel_consumption?: {
-    city?: number;
-    highway?: number;
-    combined?: number;
+    city?: string;
+    highway?: string;
+    combined?: string;
   };
 }
 
 export interface DimensionsSpecs {
-  length?: number;
-  width?: number;
-  height?: number;
-  wheelbase?: number;
-  ground_clearance?: number;
-  cargo_capacity?: number;
-  fuel_tank_capacity?: number;
+  length?: string;
+  width?: string;
+  height?: string;
+  wheelbase?: string;
+  ground_clearance?: string;
+  cargo_capacity?: string;
+  fuel_tank_capacity?: string;
 }
 
 export interface WeightSpecs {
-  curb_weight?: number;
-  gross_weight?: number;
+  curb_weight?: string;
+  gross_weight?: string;
 }
 
 export interface WheelsSpecs {
@@ -72,8 +72,8 @@ export interface WheelsSpecs {
 }
 
 export interface CapacitySpecs {
-  seating?: number;
-  doors?: number;
+  seating?: string;
+  doors?: string;
 }
 
 export interface Specifications {
@@ -87,7 +87,7 @@ export interface Specifications {
 }
 
 export interface SafetyFeatures {
-  airbags?: number;
+  airbags?: string;
   abs?: boolean;
   stability_control?: boolean;
   traction_control?: boolean;
@@ -114,8 +114,8 @@ export interface ComfortFeatures {
   cruise_control?: boolean;
   infotainment_screen?: string;
   sound_system?: string;
-  speakers_count?: number;
-  usb_ports?: number;
+  speakers_count?: string;
+  usb_ports?: string;
   wireless_charging?: boolean;
 }
 
@@ -143,8 +143,8 @@ export interface ExteriorFeatures {
 }
 
 export interface Warranty {
-  years?: number;
-  kilometers?: number;
+  years?: string;
+  kilometers?: string;
   description_en?: string;
   description_ar?: string;
 }
