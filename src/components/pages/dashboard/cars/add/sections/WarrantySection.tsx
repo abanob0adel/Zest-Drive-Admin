@@ -18,17 +18,12 @@ export default function WarrantySection({ register }: Props) {
       <div className="grid md:grid-cols-3 gap-4">
         <div>
           <Label>عدد سنوات الضمان</Label>
-          <Input
-            type="number"
-            {...register("warranty.years")}
-            placeholder="مثلاً: 5"
-          />
+          <Input {...register("warranty.years")} placeholder="مثلاً: 5" />
         </div>
 
         <div>
           <Label>عدد الكيلومترات</Label>
           <Input
-            type="number"
             {...register("warranty.kilometers")}
             placeholder="مثلاً: 100000"
           />

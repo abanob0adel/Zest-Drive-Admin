@@ -49,7 +49,6 @@ export default function FeaturesSection({ control }: Props) {
               control={control}
               render={({ field }) => (
                 <Input
-                  type="number"
                   min={0}
                   placeholder="مثلاً: 6"
                   value={field.value ?? ""}

@@ -101,32 +101,22 @@ export default function VariantsSection({ register, control }: Props) {
           {/* Year */}
           <div>
             <Label>السنة</Label>
-            <Input
-              type="number"
-              {...register(`variants.${i}.year`)}
-              placeholder="2025"
-            />
+            <Input {...register(`variants.${i}.year`)} placeholder="2025" />
           </div>
 
           <div>
             <Label>السعر الأساسي</Label>
-            <Input
-              type="number"
-              {...register(`variants.${i}.price`)}
-              placeholder="250000"
-            />
+            <Input {...register(`variants.${i}.price`)} placeholder="250000" />
           </div>
 
           <div className="flex flex-col gap-2">
             <Label>نطاق السعر (اختياري)</Label>
             <div className="flex gap-2">
               <Input
-                type="number"
                 {...register(`variants.${i}.price_range.min`)}
                 placeholder="أقل سعر"
               />
               <Input
-                type="number"
                 {...register(`variants.${i}.price_range.max`)}
                 placeholder="أعلى سعر"
               />

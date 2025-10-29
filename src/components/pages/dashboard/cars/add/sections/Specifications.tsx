@@ -57,9 +57,8 @@ export default function SpecificationsSection({ register, control }: Props) {
           </div>
 
           <div>
-            <Label>السعة اللترية</Label>
+            <Label>سعة المحرك</Label>
             <Input
-              type="number"
               {...register("specifications.engine.displacement")}
               placeholder="2000"
             />
@@ -68,7 +67,6 @@ export default function SpecificationsSection({ register, control }: Props) {
           <div>
             <Label>عدد الأسطوانات</Label>
             <Input
-              type="number"
               {...register("specifications.engine.cylinders")}
               placeholder="4"
             />
@@ -77,7 +75,6 @@ export default function SpecificationsSection({ register, control }: Props) {
           <div>
             <Label>قوة الحصان</Label>
             <Input
-              type="number"
               {...register("specifications.engine.horsepower")}
               placeholder="150"
             />
@@ -86,7 +83,6 @@ export default function SpecificationsSection({ register, control }: Props) {
           <div>
             <Label>العزم (نيوتن.متر)</Label>
             <Input
-              type="number"
               {...register("specifications.engine.torque")}
               placeholder="250"
             />
@@ -153,7 +149,6 @@ export default function SpecificationsSection({ register, control }: Props) {
           <div>
             <Label>عدد السرعات</Label>
             <Input
-              type="number"
               {...register("specifications.transmission.gears")}
               placeholder="6"
             />
@@ -170,7 +165,6 @@ export default function SpecificationsSection({ register, control }: Props) {
           <div>
             <Label>السرعة القصوى (كم/س)</Label>
             <Input
-              type="number"
               {...register("specifications.performance.top_speed")}
               placeholder="220"
             />
@@ -178,7 +172,6 @@ export default function SpecificationsSection({ register, control }: Props) {
           <div>
             <Label>التسارع 0-100 كم/س (ث)</Label>
             <Input
-              type="number"
               {...register("specifications.performance.acceleration_0_100")}
               placeholder="8.5"
             />
@@ -186,7 +179,6 @@ export default function SpecificationsSection({ register, control }: Props) {
           <div>
             <Label>استهلاك الوقود داخل المدينة</Label>
             <Input
-              type="number"
               {...register("specifications.performance.fuel_consumption.city")}
               placeholder="9.5"
             />
@@ -194,7 +186,6 @@ export default function SpecificationsSection({ register, control }: Props) {
           <div>
             <Label>استهلاك الوقود على الطرق</Label>
             <Input
-              type="number"
               {...register(
                 "specifications.performance.fuel_consumption.highway"
               )}
@@ -204,7 +195,6 @@ export default function SpecificationsSection({ register, control }: Props) {
           <div>
             <Label>استهلاك الوقود الكلي</Label>
             <Input
-              type="number"
               {...register(
                 "specifications.performance.fuel_consumption.combined"
               )}
@@ -222,50 +212,33 @@ export default function SpecificationsSection({ register, control }: Props) {
         <div className="grid md:grid-cols-3 gap-4">
           <div>
             <Label>الطول (مم)</Label>
-            <Input
-              type="number"
-              {...register("specifications.dimensions.length")}
-            />
+            <Input {...register("specifications.dimensions.length")} />
           </div>
           <div>
             <Label>العرض (مم)</Label>
-            <Input
-              type="number"
-              {...register("specifications.dimensions.width")}
-            />
+            <Input {...register("specifications.dimensions.width")} />
           </div>
           <div>
             <Label>الارتفاع (مم)</Label>
-            <Input
-              type="number"
-              {...register("specifications.dimensions.height")}
-            />
+            <Input {...register("specifications.dimensions.height")} />
           </div>
           <div>
             <Label>قاعدة العجلات (مم)</Label>
-            <Input
-              type="number"
-              {...register("specifications.dimensions.wheelbase")}
-            />
+            <Input {...register("specifications.dimensions.wheelbase")} />
           </div>
           <div>
             <Label>الخلوص الأرضي (مم)</Label>
             <Input
-              type="number"
               {...register("specifications.dimensions.ground_clearance")}
             />
           </div>
           <div>
             <Label>سعة التخزين (لتر)</Label>
-            <Input
-              type="number"
-              {...register("specifications.dimensions.cargo_capacity")}
-            />
+            <Input {...register("specifications.dimensions.cargo_capacity")} />
           </div>
           <div>
             <Label>سعة خزان الوقود (لتر)</Label>
             <Input
-              type="number"
               {...register("specifications.dimensions.fuel_tank_capacity")}
             />
           </div>
@@ -278,17 +251,11 @@ export default function SpecificationsSection({ register, control }: Props) {
         <div className="grid md:grid-cols-3 gap-4">
           <div>
             <Label>الوزن الفارغ (كجم)</Label>
-            <Input
-              type="number"
-              {...register("specifications.weight.curb_weight")}
-            />
+            <Input {...register("specifications.weight.curb_weight")} />
           </div>
           <div>
             <Label>الوزن الإجمالي (كجم)</Label>
-            <Input
-              type="number"
-              {...register("specifications.weight.gross_weight")}
-            />
+            <Input {...register("specifications.weight.gross_weight")} />
           </div>
         </div>
       </div>
