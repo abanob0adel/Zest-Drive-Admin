@@ -10,6 +10,7 @@ import AddBrand from "./components/pages/dashboard/Brands/add/AddBrand";
 import MainEdit from "./components/pages/dashboard/Brands/edit/MainEdit";
 import MainCars from "./components/pages/dashboard/cars/main/MainCars";
 import AddCar from "./components/pages/dashboard/cars/add/AddCar";
+import MainEditCar from "./components/pages/dashboard/cars/edit/MainEditCat";
 
 function App() {
   return (
@@ -38,6 +39,10 @@ function App() {
             />
             <Route path={routes?.Dashboard?.Car?.Main} element={<MainCars />} />
             <Route path={routes?.Dashboard?.Car?.Add} element={<AddCar />} />
+            <Route
+              path={routes?.Dashboard?.Car?.Edit(":slug")}
+              element={<MainEditCar />}
+            />
           </Route>
 
           {/* Public Routes */}

@@ -62,8 +62,10 @@ export default function MainCars() {
                     >
                       <Eye />
                     </Button>
-                    <Button variant="secondary" size="icon">
-                      <Edit />
+                    <Button variant="secondary" size="icon" asChild>
+                      <a href={routes?.Dashboard?.Car?.Edit(item.slug)}>
+                        <Edit />
+                      </a>
                     </Button>
                     <Button variant="secondary" size="icon">
                       <Image />
