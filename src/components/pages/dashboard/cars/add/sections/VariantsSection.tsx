@@ -113,10 +113,12 @@ export default function VariantsSection({ register, control }: Props) {
             <Label>نطاق السعر (اختياري)</Label>
             <div className="flex gap-2">
               <Input
+                type="number"
                 {...register(`variants.${i}.price_range.min`)}
                 placeholder="أقل سعر"
               />
               <Input
+                type="number"
                 {...register(`variants.${i}.price_range.max`)}
                 placeholder="أعلى سعر"
               />
