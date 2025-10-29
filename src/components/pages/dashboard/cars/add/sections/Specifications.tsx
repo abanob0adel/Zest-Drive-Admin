@@ -268,9 +268,16 @@ export default function SpecificationsSection({ register, control }: Props) {
         <div className="grid md:grid-cols-3 gap-4">
           <div>
             <Label>مقاس الإطار</Label>
-            <Input
-              {...register("specifications.wheels.size")}
-              placeholder="17 inch"
+            <Controller
+              name="specifications.wheels.size"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  value={field.value || ""}
+                  onChange={(e) => field.onChange(e.target.value)}
+                  placeholder="17 inch"
+                />
+              )}
             />
           </div>
           <div>

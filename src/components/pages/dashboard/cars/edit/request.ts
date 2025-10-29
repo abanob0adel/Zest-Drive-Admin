@@ -14,7 +14,7 @@ export const getCarDetails = async (
 
 export const editCarRequest = async (slug: string, data: FormData) => {
   const res = await axios.put(`cars/${slug}`, data, {
-    headers: { "Content-Type": "multipart/form-data" },
+    headers: { "Content-Type": "application/json" },
   });
   return res.data;
 };
