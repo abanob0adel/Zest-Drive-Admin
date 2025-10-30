@@ -9,6 +9,7 @@ export const useAddBrand = () => {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<AddBrandTypes>();
   const onSubmit: SubmitHandler<AddBrandTypes> = async (data) => {
@@ -45,5 +46,6 @@ export const useAddBrand = () => {
     onSubmit,
     isSubmitting,
     errors,
+    setValue,
   };
 };

@@ -4,5 +4,5 @@ export interface EditBrandTypes {
   country: string;
   meta_title: string;
   meta_description: string;
-  logo?: FileList;
+  logo?: string;
 }

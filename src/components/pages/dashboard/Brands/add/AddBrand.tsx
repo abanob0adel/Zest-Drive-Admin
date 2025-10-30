@@ -3,9 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useAddBrand } from "./Logic";
 import { Textarea } from "@/components/ui/textarea";
+import UploadImage from "@/components/shared/upload/UploadImage";
 
 export default function AddBrand() {
-  const { register, handleSubmit, onSubmit, isSubmitting } = useAddBrand();
+  const { register, handleSubmit, onSubmit, isSubmitting, setValue } =
+    useAddBrand();
 
   return (
     <div className="h-screen flex flex-col items-center justify-center">
@@ -35,7 +37,10 @@ export default function AddBrand() {
             placeholder="meta_desctiption"
             {...register("meta_description")}
           />
-          <Input type="file" accept="image/*" {...register("logo")} />
+          <UploadImage
+            label="شعار البراند"
+            onUploaded={(url) => setValue("logo", url)}
+          />
           <Button type="submit" disabled={isSubmitting}>
             {isSubmitting ? "جاري الإضافة..." : "أضف البراند الآن"}
           </Button>
