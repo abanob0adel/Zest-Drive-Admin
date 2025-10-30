@@ -31,6 +31,7 @@ export default function EditCar({ slug, initialData }: Props) {
         <WarrantySection register={register} control={control} />
         <StatusSection control={control} />
         <MetaSection register={register} control={control} />
+
         <Button type="submit" disabled={isSubmitting} className="w-full">
           {isSubmitting ? "جاري التعديل..." : "حفظ التعديلات"}
         </Button>

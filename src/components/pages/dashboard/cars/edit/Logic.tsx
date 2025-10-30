@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 import type { AddCarTypes } from "../add/types";
@@ -11,42 +11,29 @@ type UseEditArgs = {
   initialData: AddCarTypes;
 };
 
-// 🧩 recursive fill function
-function fillFormValues(
-  data: Record<string, any>,
-  parentKey = "",
-  setValue: (name: string, value: any) => void
-) {
-  Object.entries(data).forEach(([key, value]) => {
-    const fullKey = parentKey ? `${parentKey}.${key}` : key;
-
-    if (value && typeof value === "object" && !Array.isArray(value)) {
-      fillFormValues(value, fullKey, setValue);
-    } else {
-      setValue(fullKey, value);
-    }
-  });
-}
-
 export const useEditCar = ({ slug, initialData }: UseEditArgs) => {
   const {
     register,
     handleSubmit,
     control,
-    setValue,
+    reset,
     formState: { isSubmitting },
-  } = useForm<AddCarTypes>();
+  } = useForm<AddCarTypes>({
+    shouldUnregister: false,
+    defaultValues: initialData || {},
+  });
+
+  const didInit = useRef(false);
 
   useEffect(() => {
-    if (initialData) {
-      const safeSetValue = (name: string, value: any) => {
-        setValue(name as any, value);
-      };
-      fillFormValues(initialData as any, "", safeSetValue);
+    if (initialData && !didInit.current) {
+      reset(initialData);
+      didInit.current = true;
     }
-  }, [initialData, setValue]);
+  }, [initialData, reset]);
 
   const onSubmit: SubmitHandler<AddCarTypes> = async (values) => {
+    console.log("🚀 onSubmit triggered");
     try {
       console.log("🟢 Updated Data:", values);
       const res = await editCarRequest(slug, values);
@@ -57,12 +44,5 @@ export const useEditCar = ({ slug, initialData }: UseEditArgs) => {
     }
   };
 
-  return {
-    register,
-    handleSubmit,
-    control,
-    onSubmit,
-    isSubmitting,
-    setValue,
-  };
+  return { register, handleSubmit, control, onSubmit, isSubmitting };
 };

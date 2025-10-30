@@ -26,19 +26,13 @@ export default function MainEditCar() {
     if (slug) fetchCar();
   }, [slug]);
 
-  if (loading)
+  if (loading || !initialData) {
     return (
       <div className="flex justify-center items-center h-[70vh]">
         <Loader2 className="w-6 h-6 animate-spin" />
       </div>
     );
-
-  if (!initialData)
-    return (
-      <div className="text-center py-10 text-red-500">
-        لم يتم العثور على السيارة
-      </div>
-    );
+  }
 
   return <EditCar slug={slug as string} initialData={initialData} />;
 }
