@@ -17,25 +17,27 @@ export const useEditCar = ({ slug, initialData }: UseEditArgs) => {
     handleSubmit,
     control,
     reset,
+    getValues,
     formState: { isSubmitting },
   } = useForm<AddCarTypes>({
     shouldUnregister: false,
-    defaultValues: initialData || {},
   });
 
   const didInit = useRef(false);
 
   useEffect(() => {
     if (initialData && !didInit.current) {
-      reset(initialData);
-      didInit.current = true;
+      setTimeout(() => {
+        reset(initialData);
+        didInit.current = true;
+      }, 0);
     }
   }, [initialData, reset]);
 
   const onSubmit: SubmitHandler<AddCarTypes> = async (values) => {
     console.log("🚀 onSubmit triggered");
+    console.log("🟢 Updated Data:", getValues()); // ✅ تأكيد القيم الحقيقية
     try {
-      console.log("🟢 Updated Data:", values);
       const res = await editCarRequest(slug, values);
       if (res) toast.success("تم تعديل السيارة بنجاح");
     } catch (err: any) {
