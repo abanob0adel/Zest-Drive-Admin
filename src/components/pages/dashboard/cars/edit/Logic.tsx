@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useMemo } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 import type { AddCarTypes } from "../add/types";
@@ -11,35 +11,35 @@ type UseEditArgs = {
 };
 
 export const useEditCar = ({ slug, initialData }: UseEditArgs) => {
+  // ✅ مستخدم useMemo عشان defaultValues تحتفظ بالقيمة
+  const defaultValues = useMemo(
+    () => initialData,
+    [JSON.stringify(initialData)]
+  );
+
   const {
     register,
     handleSubmit,
     control,
-    reset,
     getValues,
     formState: { isSubmitting, errors },
   } = useForm<AddCarTypes>({
     shouldUnregister: false,
     mode: "onChange",
-    defaultValues: initialData,
+    defaultValues, // ✅ استخدام defaultValues بدل useEffect
   });
-
-  const isFirstLoad = useRef(true);
-  useEffect(() => {
-    if (initialData && isFirstLoad.current) {
-      reset(initialData, {
-        keepDirty: false,
-        keepTouched: false,
-      });
-      isFirstLoad.current = false;
-    }
-  }, []);
 
   const onSubmit: SubmitHandler<AddCarTypes> = async (data) => {
     try {
       console.log("📤 Submitting data:", data);
-      const response = await editCarRequest(slug, data);
+
+      // تأكد من البيانات الحالية
+      const finalData = getValues();
+      console.log("📤 Final data:", finalData);
+
+      const response = await editCarRequest(slug, finalData);
       console.log("✅ Response:", response);
+
       toast.success("تم تعديل السيارة بنجاح");
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
