@@ -11,21 +11,38 @@ type UseEditArgs = {
   initialData: AddCarTypes;
 };
 
+// 🧩 recursive fill function
+function fillFormValues(
+  data: Record<string, any>,
+  parentKey = "",
+  setValue: (name: string, value: any) => void
+) {
+  Object.entries(data).forEach(([key, value]) => {
+    const fullKey = parentKey ? `${parentKey}.${key}` : key;
+
+    if (value && typeof value === "object" && !Array.isArray(value)) {
+      fillFormValues(value, fullKey, setValue);
+    } else {
+      setValue(fullKey, value);
+    }
+  });
+}
+
 export const useEditCar = ({ slug, initialData }: UseEditArgs) => {
   const {
     register,
     handleSubmit,
     control,
     setValue,
-    getValues,
     formState: { isSubmitting },
   } = useForm<AddCarTypes>();
 
   useEffect(() => {
     if (initialData) {
-      Object.entries(initialData).forEach(([key, value]) => {
-        setValue(key as keyof AddCarTypes, value as any);
-      });
+      const safeSetValue = (name: string, value: any) => {
+        setValue(name as any, value);
+      };
+      fillFormValues(initialData as any, "", safeSetValue);
     }
   }, [initialData, setValue]);
 
@@ -47,6 +64,5 @@ export const useEditCar = ({ slug, initialData }: UseEditArgs) => {
     onSubmit,
     isSubmitting,
     setValue,
-    getValues,
   };
 };

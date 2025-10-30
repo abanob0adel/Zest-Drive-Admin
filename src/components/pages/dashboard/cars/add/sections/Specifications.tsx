@@ -38,10 +38,7 @@ export default function SpecificationsSection({ register, control }: Props) {
               name="specifications.engine.type"
               control={control}
               render={({ field }) => (
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
+                <Select onValueChange={field.onChange} value={field.value}>
                   <SelectTrigger>
                     <SelectValue placeholder="اختر نوع المحرك" />
                   </SelectTrigger>
@@ -94,10 +91,7 @@ export default function SpecificationsSection({ register, control }: Props) {
               name="specifications.engine.fuel_system"
               control={control}
               render={({ field }) => (
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
+                <Select onValueChange={field.onChange} value={field.value}>
                   <SelectTrigger>
                     <SelectValue placeholder="اختر نظام الوقود" />
                   </SelectTrigger>
@@ -128,10 +122,7 @@ export default function SpecificationsSection({ register, control }: Props) {
               name="specifications.transmission.type"
               control={control}
               render={({ field }) => (
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
+                <Select onValueChange={field.onChange} value={field.value}>
                   <SelectTrigger>
                     <SelectValue placeholder="اختر نوع الناقل" />
                   </SelectTrigger>
@@ -286,10 +277,7 @@ export default function SpecificationsSection({ register, control }: Props) {
               name="specifications.wheels.type"
               control={control}
               render={({ field }) => (
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
+                <Select onValueChange={field.onChange} value={field.value}>
                   <SelectTrigger>
                     <SelectValue placeholder="اختر نوع الإطار" />
                   </SelectTrigger>
@@ -319,7 +307,7 @@ export default function SpecificationsSection({ register, control }: Props) {
               render={({ field }) => (
                 <Select
                   onValueChange={field.onChange}
-                  defaultValue={String(field.value)}
+                  value={String(field.value)}
                 >
                   <SelectTrigger>
                     <SelectValue placeholder="اختر عدد المقاعد" />
@@ -343,7 +331,7 @@ export default function SpecificationsSection({ register, control }: Props) {
               render={({ field }) => (
                 <Select
                   onValueChange={field.onChange}
-                  defaultValue={String(field.value)}
+                  value={String(field.value)}
                 >
                   <SelectTrigger>
                     <SelectValue placeholder="اختر عدد الأبواب" />

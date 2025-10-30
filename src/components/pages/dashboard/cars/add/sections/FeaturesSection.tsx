@@ -32,7 +32,7 @@ export default function FeaturesSection({ control }: Props) {
     <section className="border border-border rounded-2xl p-6 space-y-6">
       <h2 className="text-lg font-semibold">المميزات (Features)</h2>
 
-      <Tabs defaultValue="safety" className="w-full" dir="rtl">
+      <Tabs value="safety" className="w-full" dir="rtl">
         <TabsList className="grid grid-cols-4">
           <TabsTrigger value="safety">أنظمة الأمان</TabsTrigger>
           <TabsTrigger value="comfort">الراحة</TabsTrigger>

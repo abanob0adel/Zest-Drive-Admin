@@ -133,7 +133,7 @@ export default function VariantsSection({ register, control }: Props) {
               render={({ field }) => (
                 <Select
                   onValueChange={field.onChange}
-                  defaultValue={field.value || "available"}
+                  value={field.value || "available"}
                 >
                   <SelectTrigger>
                     <SelectValue placeholder="اختر الحالة" />

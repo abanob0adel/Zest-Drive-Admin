@@ -46,7 +46,7 @@ export default function GeneralInfo({ register, control }: Props) {
             control={control}
             rules={{ required: "اختيار العلامة التجارية مطلوب" }}
             render={({ field }) => (
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select onValueChange={field.onChange} value={field.value}>
                 <SelectTrigger>
                   <SelectValue
                     placeholder={
@@ -90,7 +90,7 @@ export default function GeneralInfo({ register, control }: Props) {
             control={control}
             rules={{ required: "اختيار الفئة مطلوب" }}
             render={({ field }) => (
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select onValueChange={field.onChange} value={field.value}>
                 <SelectTrigger>
                   <SelectValue placeholder="اختر الفئة" />
                 </SelectTrigger>
