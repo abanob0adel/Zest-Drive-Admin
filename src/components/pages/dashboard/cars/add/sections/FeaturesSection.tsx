@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -11,6 +12,8 @@ interface Props {
 }
 
 export default function FeaturesSection({ control }: Props) {
+  const [activeTab, setActiveTab] = useState("safety");
+
   const renderCheckbox = (name: keyof AddCarTypes | string, label: string) => (
     <Label className="flex items-center gap-2">
       <Controller
@@ -32,8 +35,8 @@ export default function FeaturesSection({ control }: Props) {
     <section className="border border-border rounded-2xl p-6 space-y-6">
       <h2 className="text-lg font-semibold">المميزات (Features)</h2>
 
-      <Tabs value="safety" className="w-full" dir="rtl">
-        <TabsList className="grid grid-cols-4">
+      <Tabs value={activeTab} onValueChange={setActiveTab} dir="rtl">
+        <TabsList className="grid grid-cols-4 w-full">
           <TabsTrigger value="safety">أنظمة الأمان</TabsTrigger>
           <TabsTrigger value="comfort">الراحة</TabsTrigger>
           <TabsTrigger value="tech">التقنيات</TabsTrigger>
@@ -49,20 +52,20 @@ export default function FeaturesSection({ control }: Props) {
               control={control}
               render={({ field }) => (
                 <Input
+                  type="number"
                   min={0}
                   placeholder="مثلاً: 6"
                   value={field.value ?? ""}
-                  onChange={(e) => field.onChange(Number(e.target.value))}
+                  onChange={(e) => field.onChange(Number(e.target.value) || 0)}
                 />
               )}
             />
           </div>
-          {renderCheckbox("safety_features.airbags", "وسائد هوائية")}
+          {renderCheckbox("safety_features.traction_control", "التحكم بالجر")}
           {renderCheckbox(
             "safety_features.stability_control",
             "التحكم بالثبات"
           )}
-          {renderCheckbox("safety_features.traction_control", "التحكم بالجر")}
           {renderCheckbox("safety_features.parking_sensors", "حساسات ركن")}
           {renderCheckbox("safety_features.rear_camera", "كاميرا خلفية")}
           {renderCheckbox(
