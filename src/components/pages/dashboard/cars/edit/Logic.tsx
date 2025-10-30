@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 import type { AddCarTypes } from "../add/types";
@@ -16,28 +16,23 @@ export const useEditCar = ({ slug, initialData }: UseEditArgs) => {
     register,
     handleSubmit,
     control,
-    reset,
+    setValue,
     getValues,
     formState: { isSubmitting },
-  } = useForm<AddCarTypes>({
-    defaultValues: initialData,
-  });
-
-  const didInit = useRef(false);
+  } = useForm<AddCarTypes>();
 
   useEffect(() => {
-    if (!didInit.current && initialData) {
-      reset(initialData);
-      didInit.current = true;
+    if (initialData) {
+      Object.entries(initialData).forEach(([key, value]) => {
+        setValue(key as keyof AddCarTypes, value as any);
+      });
     }
-  }, [initialData, reset]);
+  }, [initialData, setValue]);
 
-  const onSubmit: SubmitHandler<AddCarTypes> = async () => {
+  const onSubmit: SubmitHandler<AddCarTypes> = async (values) => {
     try {
-      const currentValues = getValues();
-      console.log("🔹 Updated Data:", currentValues);
-
-      const res = await editCarRequest(slug, currentValues as any);
+      console.log("🟢 Updated Data:", values);
+      const res = await editCarRequest(slug, values);
       if (res) toast.success("تم تعديل السيارة بنجاح");
     } catch (err: any) {
       console.error("❌ EditCar Error:", err);
@@ -45,5 +40,13 @@ export const useEditCar = ({ slug, initialData }: UseEditArgs) => {
     }
   };
 
-  return { register, handleSubmit, control, onSubmit, isSubmitting };
+  return {
+    register,
+    handleSubmit,
+    control,
+    onSubmit,
+    isSubmitting,
+    setValue,
+    getValues,
+  };
 };
