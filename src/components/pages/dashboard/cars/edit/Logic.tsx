@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { useEffect, useRef } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
@@ -18,33 +17,46 @@ export const useEditCar = ({ slug, initialData }: UseEditArgs) => {
     control,
     reset,
     getValues,
-    formState: { isSubmitting },
+    formState: { isSubmitting, errors },
   } = useForm<AddCarTypes>({
     shouldUnregister: false,
+    mode: "onChange",
+    defaultValues: initialData,
   });
 
-  const didInit = useRef(false);
-
+  const isFirstLoad = useRef(true);
   useEffect(() => {
-    if (initialData && !didInit.current) {
-      setTimeout(() => {
-        reset(initialData);
-        didInit.current = true;
-      }, 0);
+    if (initialData && isFirstLoad.current) {
+      reset(initialData, {
+        keepDirty: false,
+        keepTouched: false,
+      });
+      isFirstLoad.current = false;
     }
-  }, [initialData, reset]);
+  }, []);
 
-  const onSubmit: SubmitHandler<AddCarTypes> = async (values) => {
-    console.log("🚀 onSubmit triggered");
-    console.log("🟢 Updated Data:", getValues()); // ✅ تأكيد القيم الحقيقية
+  const onSubmit: SubmitHandler<AddCarTypes> = async (data) => {
     try {
-      const res = await editCarRequest(slug, values);
-      if (res) toast.success("تم تعديل السيارة بنجاح");
+      console.log("📤 Submitting data:", data);
+      const response = await editCarRequest(slug, data);
+      console.log("✅ Response:", response);
+      toast.success("تم تعديل السيارة بنجاح");
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
-      console.error("❌ EditCar Error:", err);
-      toast.error(err?.response?.data?.message || "حدث خطأ أثناء التحديث");
+      console.error("❌ Error:", err);
+      const errorMessage =
+        err?.response?.data?.message || "حدث خطأ أثناء التحديث";
+      toast.error(errorMessage);
     }
   };
 
-  return { register, handleSubmit, control, onSubmit, isSubmitting };
+  return {
+    register,
+    handleSubmit,
+    control,
+    onSubmit,
+    isSubmitting,
+    getValues,
+    errors,
+  };
 };

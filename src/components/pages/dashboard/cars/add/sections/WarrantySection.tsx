@@ -1,7 +1,6 @@
 "use client";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import type { UseFormRegister, Control } from "react-hook-form";
 import type { AddCarTypes } from "../types";
 
@@ -20,7 +19,7 @@ export default function WarrantySection({ register }: Props) {
           <Label>عدد سنوات الضمان</Label>
           <Input
             type="number"
-            {...register("warranty.years")}
+            {...register("warranty.years", { valueAsNumber: true })}
             placeholder="مثلاً: 5"
           />
         </div>
@@ -29,7 +28,7 @@ export default function WarrantySection({ register }: Props) {
           <Label>عدد الكيلومترات</Label>
           <Input
             type="number"
-            {...register("warranty.kilometers")}
+            {...register("warranty.kilometers", { valueAsNumber: true })}
             placeholder="مثلاً: 100000"
           />
         </div>
@@ -37,14 +36,15 @@ export default function WarrantySection({ register }: Props) {
 
       <div>
         <Label>تفاصيل الضمان بالعربية</Label>
-        <Textarea
+        <Input
           {...register("warranty.description_ar")}
           placeholder="مثلاً: ضمان شامل لمدة 5 سنوات أو 100,000 كم ضد عيوب الصناعة."
         />
       </div>
+
       <div>
         <Label>Warranty Details (English)</Label>
-        <Textarea
+        <Input
           {...register("warranty.description_en")}
           placeholder="Example: Full 5-year or 100,000 km warranty covering manufacturing defects."
         />
