@@ -203,11 +203,14 @@ export interface Car {
 
 export interface CarListResponse {
   cars: Car[];
+  pagination: CarPagination;
+}
+export interface CarPagination {
   total: number;
   page: number;
   pages: number;
+  limit: number;
 }
-
 export interface CarDetailsResponse {
   car: Car;
 }
