@@ -23,6 +23,10 @@ export const useOTP = () => {
           import.meta.env.VITE_TOKEN_NAME as string,
           response.accessToken
         );
+        Cookies.set(
+          import.meta.env.VITE_REFRESH_TOKEN_NAME as string,
+          response.refreshToken
+        );
         window.location.href = routes?.Dashboard?.Home;
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

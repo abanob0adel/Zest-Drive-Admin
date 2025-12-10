@@ -4,6 +4,7 @@ export interface OTPTypes {
 }
 export interface OTPResponse {
   accessToken: string;
+  refreshToken: string;
   user: {
     id: string;
     name: string;
