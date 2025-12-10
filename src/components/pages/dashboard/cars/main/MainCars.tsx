@@ -49,8 +49,8 @@ export default function MainCars() {
             <TableBody>
               {cars?.cars?.map((item: Car) => (
                 <TableRow key={item._id}>
-                  <TableCell>{item.model_name_ar}</TableCell>
-                  <TableCell>{item.model_name_en}</TableCell>
+                  <TableCell>{item.name_ar}</TableCell>
+                  <TableCell>{item.name_en}</TableCell>
                   <TableCell>
                     {typeof item.brand === "string"
                       ? item.brand
@@ -77,10 +77,7 @@ export default function MainCars() {
                         <Image />
                       </Button>
 
-                      <MainDelete
-                        slug={item?.slug}
-                        title={item.model_name_ar}
-                      />
+                      <MainDelete slug={item?.slug} title={item.name_ar} />
                     </div>
                   </TableCell>
                 </TableRow>

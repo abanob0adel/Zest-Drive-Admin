@@ -167,8 +167,8 @@ export interface Car {
   _id: string;
   slug: string;
   brand: Brand;
-  model_name_en: string;
-  model_name_ar: string;
+  name_en: string;
+  name_ar: string;
   category: CarCategory;
   body_type?: string;
 
