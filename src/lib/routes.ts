@@ -1,6 +1,7 @@
 const routes = {
   Auth: {
     Login: "/login",
+    OTP: "/otp",
   },
   Dashboard: {
     Home: "/",

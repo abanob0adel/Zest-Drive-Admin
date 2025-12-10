@@ -3,10 +3,6 @@ export interface LoginTypes {
   password: string;
 }
 export interface LoginResponse {
-  token: string;
-  user: {
-    id: string;
-    name: string;
-    role: string;
-  };
+  message: string;
+  step: string;
 }
