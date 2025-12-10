@@ -21,7 +21,7 @@ export default function CarDetailsDialog({ car, open, onClose }: Props) {
       <DialogContent className="w-[80%] overflow-y-auto max-h-[90vh]">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold text-right">
-            تفاصيل السيارة: {car.model_name_ar} ({car.model_name_en})
+            تفاصيل السيارة: {car.name_ar} ({car.name_en})
           </DialogTitle>
         </DialogHeader>
 
