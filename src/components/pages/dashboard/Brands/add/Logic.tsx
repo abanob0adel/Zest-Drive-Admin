@@ -10,6 +10,7 @@ export const useAddBrand = () => {
     handleSubmit,
     reset,
     setValue,
+    control,
     formState: { errors, isSubmitting },
   } = useForm<AddBrandTypes>();
   const onSubmit: SubmitHandler<AddBrandTypes> = async (data) => {
@@ -20,10 +21,7 @@ export const useAddBrand = () => {
       formData.append("meta_title", data.meta_title);
       formData.append("meta_description", data.meta_description);
       formData.append("country", data.country);
-
-      if (data.logo && data.logo[0]) {
-        formData.append("logo", data.logo[0]);
-      }
+      formData.append("logo", data.logo || "");
 
       const response = await addBrandRequest(
         formData as unknown as AddBrandTypes
@@ -47,5 +45,6 @@ export const useAddBrand = () => {
     isSubmitting,
     errors,
     setValue,
+    control,
   };
 };

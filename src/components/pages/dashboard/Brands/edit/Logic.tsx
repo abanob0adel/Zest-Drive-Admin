@@ -20,6 +20,7 @@ export const useEditBrand = () => {
     handleSubmit,
     reset,
     setValue,
+    control,
     formState: { errors, isSubmitting },
   } = useForm<EditBrandTypes>();
   useEffect(() => {
@@ -28,6 +29,7 @@ export const useEditBrand = () => {
     setValue("country", singleBrand?.country as string);
     setValue("meta_title", singleBrand?.meta_title as string);
     setValue("meta_description", singleBrand?.meta_description as string);
+    setValue("logo", singleBrand?.logo as string);
   }, [singleBrand]);
   const onSubmit: SubmitHandler<EditBrandTypes> = async (data) => {
     try {
@@ -37,10 +39,7 @@ export const useEditBrand = () => {
       formData.append("country", data.country);
       formData.append("meta_title", data.meta_title);
       formData.append("meta_description", data.meta_description);
-
-      if (data.logo && data.logo[0]) {
-        formData.append("logo", data.logo[0]);
-      }
+      formData.append("logo", data.logo || "");
 
       const response = await editBrandRequest(
         formData as unknown as EditBrandTypes,
@@ -64,5 +63,7 @@ export const useEditBrand = () => {
     onSubmit,
     isSubmitting,
     errors,
+    setValue,
+    control,
   };
 };

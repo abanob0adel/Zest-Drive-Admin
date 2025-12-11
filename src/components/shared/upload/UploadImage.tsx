@@ -1,16 +1,20 @@
-"use client";
 import { useState } from "react";
-import { Input } from "@/components/ui/input";
 import { uploadMediaRequest } from "./uploadMedia";
+import { Input } from "@/components/ui/input";
 
 interface UploadImageProps {
   label?: string;
-  onUploaded: (url: string) => void;
+  value?: string | null;
+  onChange: (url: string) => void;
 }
 
-export default function UploadImage({ label, onUploaded }: UploadImageProps) {
+export default function UploadImage({
+  label,
+  value,
+  onChange,
+}: UploadImageProps) {
   const [isUploading, setIsUploading] = useState(false);
-  const [preview, setPreview] = useState<string | null>(null);
+  const preview = value ?? null;
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -21,8 +25,7 @@ export default function UploadImage({ label, onUploaded }: UploadImageProps) {
       const data = await uploadMediaRequest(file);
 
       if (data?.url) {
-        setPreview(data.url);
-        onUploaded(data.url);
+        onChange(data.url);
       }
     } catch (err) {
       console.error("Upload error:", err);
@@ -35,7 +38,9 @@ export default function UploadImage({ label, onUploaded }: UploadImageProps) {
     <div className="flex flex-col gap-3">
       {label && <label className="font-medium">{label}</label>}
       <Input type="file" accept="image/*" onChange={handleFileChange} />
+
       {isUploading && <p className="text-sm text-gray-500">جاري الرفع...</p>}
+
       {preview && (
         <div className="mt-2">
           <img

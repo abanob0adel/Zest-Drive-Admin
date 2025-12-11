@@ -3,9 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useEditBrand } from "./Logic";
 import { Textarea } from "@/components/ui/textarea";
+import { Controller } from "react-hook-form";
+import UploadImage from "@/components/shared/upload/UploadImage";
 
 export default function MainEdit() {
-  const { register, handleSubmit, onSubmit, isSubmitting } = useEditBrand();
+  const { register, handleSubmit, onSubmit, isSubmitting, control } =
+    useEditBrand();
 
   return (
     <div className="h-screen flex flex-col items-center justify-center">
@@ -35,7 +38,17 @@ export default function MainEdit() {
             placeholder="meta_desctiption"
             {...register("meta_description")}
           />
-          <Input type="file" accept="image/*" {...register("logo")} />
+          <Controller
+            name="logo"
+            control={control}
+            render={({ field }) => (
+              <UploadImage
+                label="شعار البراند"
+                value={field.value}
+                onChange={field.onChange}
+              />
+            )}
+          />
           <Button type="submit" disabled={isSubmitting}>
             {isSubmitting ? "جاري الإضافة..." : "تعديل البراند الآن"}
           </Button>

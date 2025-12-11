@@ -4,9 +4,10 @@ import { Input } from "@/components/ui/input";
 import { useAddBrand } from "./Logic";
 import { Textarea } from "@/components/ui/textarea";
 import UploadImage from "@/components/shared/upload/UploadImage";
+import { Controller } from "react-hook-form";
 
 export default function AddBrand() {
-  const { register, handleSubmit, onSubmit, isSubmitting, setValue } =
+  const { register, handleSubmit, onSubmit, isSubmitting, control } =
     useAddBrand();
 
   return (
@@ -37,9 +38,16 @@ export default function AddBrand() {
             placeholder="meta_desctiption"
             {...register("meta_description")}
           />
-          <UploadImage
-            label="شعار البراند"
-            onUploaded={(url) => setValue("logo", url)}
+          <Controller
+            name="logo"
+            control={control}
+            render={({ field }) => (
+              <UploadImage
+                label="شعار البراند"
+                value={field.value}
+                onChange={field.onChange}
+              />
+            )}
           />
           <Button type="submit" disabled={isSubmitting}>
             {isSubmitting ? "جاري الإضافة..." : "أضف البراند الآن"}
